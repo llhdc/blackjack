@@ -3,18 +3,9 @@ require_relative "card"
 class Deck
   SUITS = [:clubs, :diamonds, :hearts, :spades]
 
-  def initialize(cards)
+  def initialize
     @cards = []
     @ranks = Card::RANKS
-    SUITS.each do |suit|
-      @ranks.each do |rank|
-        @cards << Card.new(rank, suit)
-      end
-    end
-  end
-
-  def cards
-    @cards = []
     SUITS.each do |suit|
       @ranks.each do |rank|
         @cards << Card.new(rank, suit)
