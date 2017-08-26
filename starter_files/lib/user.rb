@@ -5,6 +5,10 @@ class User
     @hand = hand
     @money = money
   end
+  
+  def money
+    @money
+  end
 
   def hit
     # push drawn card to hand array
