@@ -13,16 +13,29 @@ class Deck
     end
   end
 
-   def cards_left
-     @cards.length
-   end
+  def cards
+    @cards = []
+    SUITS.each do |suit|
+      @ranks.each do |rank|
+        @cards << Card.new(rank, suit)
+      end
+    end
+  end
 
-   def draw
-     @cards.shift
-   end
+  def money
+    @money
+  end
 
-   def shuffle
-     @cards.shuffle
-   end
+  def cards_left
+   @cards.length
+  end
+
+  def draw
+   @cards.shift
+  end
+
+  def shuffle
+   @cards.shuffle
+  end
 
 end
