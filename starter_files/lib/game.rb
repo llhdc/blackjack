@@ -19,14 +19,18 @@ class Game
     while true
       print "Do you want to (h)it or (s)tand?"
       answer = gets.chomp.downcase
-      if answer == "h"
+      if answer == " h"
         hit
-      elsif answer == "s"
+        # create a 'show_hand' method that will dynamically show cards in hand
+        puts "You hit. You now have a #{user.hand[0]}, a #{user.hand[1]} and #{user.hand[2]} Your total is #{user.hand_value}"
+        puts "The dealer hit. Their total is #{dealer.hand_value}"
+      elsif answer == " s"
+        puts "You stand. Your total is #{user.hand_value}."
         true
       else
         false
+        puts "That is not a valid answer!"
       end
-      puts "That is not a valid answer!"
     end
   end
 
