@@ -1,30 +1,21 @@
-require_relative 'lib/deck'
-# require_relative 'lib/game'
-require_relative 'lib/user'
-require_relative 'lib/dealer'
+require_relative 'lib/game'
 
-# Game.new
 puts "Hello and welcome to the game of blackjack! Let's begin."
+game = Game.new
 
-user = User.new([], 100)
-puts "You have #{user.money} and bet $10"
+def start(game)
+  game.user_money_and_bet
+  game.user_hand_value
+end
 
-dealer = Dealer.new([])
+start(game)
+game.new_deck
+game.hit
+game.user_hand
+game.user_hand_value
+game.user_move
 
-deck = Deck.new
-deck.shuffle
 
-
-user.hand << user.draw * 2
-puts "You have a #{user.hand[0].to_i} and a #{user.hand[1].to_i}. Your total is #{user.hand.sum}"
-dealer.hand << dealer.draw * 2
-# #
-# #
-# # puts "Do you want to hit or stand?"
-# # user_move = gets.chomp.to_s
-# #
-# # if user_move == "H"
-# #   user.hit
-# # else
-# #   user.stand
-# # end
+# until loop for rounds
+until game.user.money == 0
+end
