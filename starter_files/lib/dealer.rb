@@ -5,10 +5,8 @@ class Dealer
     @hand = hand
   end
 
-  def hit
-    # push drawn card to hand array
-    @hand = []
-    self.hand << deck.draw
+  def hand
+    @hand
   end
 
   def stand
