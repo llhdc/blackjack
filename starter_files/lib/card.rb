@@ -18,7 +18,7 @@ class Card
   # end
 
   def value
-    RANKS.index(self.rank)
+    RANKS.index(self.rank) + 1
   end
 
 end
