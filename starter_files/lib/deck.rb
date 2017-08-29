@@ -26,7 +26,7 @@ class Deck
   end
 
   def shuffle
-   @cards.shuffle
+   @cards = @cards.shuffle
   end
 
 end
