@@ -1,19 +1,11 @@
 require_relative 'deck'
 
 class Dealer
-  def initialize(hand)
-    @hand = hand
+  def initialize
+    @hand = []
   end
 
   def hand
     @hand
-  end
-
-  def stand
-
-  end
-
-  def dealer_move
-    rand
   end
 end
