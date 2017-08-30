@@ -102,8 +102,11 @@ class Game
           abort
         end
 
+        user_move
+
       elsif answer == " s" || answer == "s"
         puts "You chose to stand. Your hand total is #{hand_value}"
+        user_move
         true
       else
         false
