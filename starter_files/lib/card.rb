@@ -12,10 +12,10 @@ class Card
     value > card.value
   end
 
-  # def ==(card)
-  #   card
-  #   self.suit == card.suit && self.rank == card.rank
-  # end
+  def ==(card)
+    card
+    self.suit == card.suit && self.rank == card.rank
+  end
 
   def value
     RANKS.index(self.rank) + 1
