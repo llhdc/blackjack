@@ -1,3 +1,4 @@
+require 'pry'
 require_relative 'deck'
 require_relative 'user'
 require_relative 'dealer'
@@ -15,6 +16,17 @@ class Game
     user_money_and_bet
     user_move
     dealer_move
+    user_move
+    dealer_move
+    if hand_value(user) == 21
+      puts "You win!"
+    elsif hand_value(dealer) == 21
+      puts "Dealer wins!"
+    elsif hand_value(user) > hand_value(dealer) && hand_value(user) < 21
+      puts "You win"
+    elsif hand_value(dealer) > hand_value(user) && hand_value(dealer) < 21
+      puts "Dealer wins!"
+    end
   end
 
   def user_money_and_bet
@@ -31,97 +43,82 @@ class Game
 
   def user_move
     # loop until you get a good answer and return
-    while true
-      print "User: Do you want to (h)it or (s)tand?"
-      answer = gets.chomp.downcase
-      if answer == " h" || answer == "h"
-        puts "You hit!"
-        2.times do
-          user.hand << @deck.draw
-        end
-
-        hand = user.hand.length - 1
-        hand_value = 0
-
-        for i in 0..hand
-          hand_value += user.hand[i].value
-          # if hand_value > 11
-          #   "A" = 1
-          # elsif hand_value < 11
-          #   "A" = 11
-          # end
-          puts "Card: #{user.hand[i].rank} #{user.hand[i].suit.upcase}"
-        end
-        puts "Your hand total is #{hand_value}"
-
-        if hand_value > 21
-          puts "Your hand total is #{hand_value}. You bust!"
-          abort
-        end
-
-        dealer_move
-
-
-      elsif answer == " s" || answer == "s"
-        puts "You chose to stand. Your hand total is #{hand_value}"
-        dealer_move
-        true
-      else
-        false
-        puts "That is not a valid answer!"
+    print "User: Do you want to (h)it or (s)tand?"
+    answer = gets.chomp.downcase
+    if answer == " h" || answer == "h"
+      puts "You hit!"
+      2.times do
+        user.hand << @deck.draw
       end
+
+      user.hand.each do |card|
+        puts "#{card.rank.to_s} of #{card.suit.to_s.upcase}"
+      end
+      # puts "Card: #{user.hand.rank} #{user.hand.suit.upcase}"
+
+      puts "Your hand total is #{hand_value(user)}"
+
+      if hand_value(user) > 21
+        puts "Your hand total is #{hand_value(user)}. You bust!"
+        abort
+      end
+
+
+    elsif answer == " s" || answer == "s"
+      puts "You chose to stand. Your hand total is #{hand_value(user)}"
+      dealer_move
+      true
+    else
+      false
+      puts "That is not a valid answer!"
     end
   end
 
   def dealer_move
     # loop until you get a good answer and return
-    while true
-      print "Dealer: Do you want to (h)it or (s)tand?"
-      answer = gets.chomp.downcase
-      if answer == " h" || answer == "h"
-        2.times do
-          @dealer.hand << @deck.draw
-        end
-
-        hand = dealer.hand.length - 1
-        hand_value = 0
-
-        for i in 0..hand
-          hand_value += user.hand[i].value
-          # if dealer.hand_value > 11
-          #   dealer.hand[0].value = 1
-          # elsif dealer.hand_value < 11
-          #   dealer.hand[0].value = 11
-          # end
-          puts "Card: #{dealer.hand[i].rank} #{dealer.hand[i].suit.upcase}"
-        end
-        puts "The dealer's hand total is #{hand_value}"
-
-        if hand_value > 21
-          puts "Your hand total is #{hand_value}. You bust!"
-          abort
-        end
-
-        user_move
-
-      elsif answer == " s" || answer == "s"
-        puts "You chose to stand. Your hand total is #{hand_value}"
-        user_move
-        true
-      else
-        false
-        puts "That is not a valid answer!"
+    print "Dealer: Do you want to (h)it or (s)tand?"
+    answer = gets.chomp.downcase
+    if answer == " h" || answer == "h"
+      2.times do
+        @dealer.hand << @deck.draw
       end
+
+      # puts "Card: #{dealer.hand[i].rank} #{dealer.hand[i].suit.upcase}"
+
+      puts "The dealer's hand total is #{hand_value(dealer)}"
+
+
+
+      if hand_value(dealer) > 21
+        puts "Your hand total is #{hand_value(dealer)}. You bust!"
+        abort
+      end
+
+    elsif answer == " s" || answer == "s"
+      puts "You chose to stand. Your hand total is #{hand_value(dealer)}"
+      user_move
+      true
+    else
+      false
+      puts "That is not a valid answer!"
     end
   end
 
-
+  def hand_value(player)
+    player.hand.reduce(0) do |acc, num|
+      if num.rank.to_s == "J" || num.rank.to_s == "Q" || num.rank.to_s == "K"
+        acc + 10
+      elsif num.rank.to_s == "A"
+        acc + 11
+      else
+        acc + num.rank
+      end
+    end
+  end
 
   def ran_out_of_cards
     if @deck.cards_left == 0
       @deck = Deck.new
     end
   end
-
-
 end
