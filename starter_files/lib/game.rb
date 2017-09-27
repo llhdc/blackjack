@@ -107,7 +107,7 @@ class Game
           puts "#{card.rank.to_s} of #{card.suit.to_s.upcase}"
         end
         puts "\n"
-        puts "Your hand total is #{hand_value(user)}"
+        puts "Your hand total is #{hand_value(user)}\n"
         puts "The dealer's hand total is #{hand_value(dealer)}"
         puts "\n"
 
