@@ -37,7 +37,7 @@ class GameTest < Minitest::Test
   def test_show_hand
     a_of_clubs = Card.new(Card::RANKS[0], Card::SUITS[0])
     @user.hand.push(a_of_clubs)
-    assert_output "A of CLUBS\nYour hand total is 11\n" do
+    assert_output "A of CLUBS\nThe User's hand total is 11\n" do
       @game.show_hand(@user)
     end
   end
