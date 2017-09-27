@@ -4,7 +4,7 @@ class Player
   attr_accessor :hand, :money, :name
   def initialize(name)
     @hand = []
-    @money = 10
+    @money = 100
     @name = name
   end
 
@@ -31,7 +31,7 @@ class Player
       sleep 0.7
       puts "\n\n\n\n\n:)\n\n\n\n\n\n"
       sleep 3
-      puts "Hello Michael.\n\n\n\n\n" 
+      puts "Hello Michael.\n\n\n\n\n"
       sleep 3
       puts "This is God, speaking.\n\n\n\n\n"
       sleep 4
