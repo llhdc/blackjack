@@ -29,6 +29,19 @@ class GameTest < Minitest::Test
     assert @user.hand.length == 1 # check if card is present in user's hand after draw
   end
 
+  def test_player_draw
+    @game.draw(@user)
+    assert @user.hand.length == 2
+  end
+
+  def test_show_hand
+    a_of_clubs = Card.new(Card::RANKS[0], Card::SUITS[0])
+    @user.hand.push(a_of_clubs)
+    assert_output "A of CLUBS\nYour hand total is 11\n" do
+      @game.show_hand(@user)
+    end
+  end
+
   def test_hand_value
     a_of_spades = Card.new(Card::RANKS[0], Card::SUITS[3])
     a_of_hearts = Card.new(Card::RANKS[0], Card::SUITS[2])
@@ -53,12 +66,13 @@ class GameTest < Minitest::Test
     @game.tie?(@user, @dealer)
   end
 
-  def test_defeats?
+  def test_user_defeats_dealer(user, dealer)?\n
     a_of_spades = Card.new(Card::RANKS[0], Card::SUITS[3])
     k_of_hearts = Card.new(Card::RANKS[12], Card::SUITS[2])
-    6_of_hearts = Card.new(Card::RANKS[5], Card::SUITS[2])
-    @user.hand.push(a_of_spades, k_of_hearts)
+    six_of_hearts = Card.new(Card::RANKS[5], Card::SUITS[2])
+    @user.hand.push(a_of_spades, k_of_hearts, six_of_hearts)
     @dealer.hand.push(a_of_spades, k_of_hearts)
+    assert user_defeats_dealer(user, dealer)
   end
 
 end
