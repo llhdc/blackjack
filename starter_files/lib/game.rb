@@ -87,8 +87,8 @@ class Game
           puts "\nThe dealer chose to stand. The dealer's hand total is #{hand_value(dealer)}."
           user_defeats_dealer?(user, dealer)
         else
-          false
           puts "\nThat is not a valid answer!"
+          false
         end
       end
     end
@@ -121,8 +121,8 @@ class Game
         dealer_move(dealer)
         true
       else
-        false
         puts "\nThat is not a valid answer!"
+        false
       end
     end
   end

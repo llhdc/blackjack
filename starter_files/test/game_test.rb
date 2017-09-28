@@ -65,14 +65,14 @@ class GameTest < Minitest::Test
     @dealer.hand.push(a_of_spades, k_of_hearts)
     @game.tie?(@user, @dealer)
   end
-
-  def test_user_defeats_dealer(user, dealer)?\n
+  
+  def test_user_defeats_dealer?
     a_of_spades = Card.new(Card::RANKS[0], Card::SUITS[3])
     k_of_hearts = Card.new(Card::RANKS[12], Card::SUITS[2])
     six_of_hearts = Card.new(Card::RANKS[5], Card::SUITS[2])
     @user.hand.push(a_of_spades, k_of_hearts, six_of_hearts)
     @dealer.hand.push(a_of_spades, k_of_hearts)
-    assert user_defeats_dealer(user, dealer)
+    assert @game.user_defeats_dealer?(@user, @dealer)
   end
 
 end
