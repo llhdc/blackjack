@@ -58,7 +58,7 @@ class Game
 
   def play(user, dealer)
     def dealer_move(dealer)
-      until bust?(dealer) || self.hand_value(dealer) == 21
+      until player_busts(dealer) || self.hand_value(dealer) == 21
         print "#{dealer.name}: Do you want to (h)it or (s)tand?\n"
         answer = gets.chomp.strip.downcase
         if answer == "h"
@@ -93,7 +93,7 @@ class Game
       end
     end
 
-    until bust?(user) || self.hand_value(user) == 21
+    until player_busts(user) || self.hand_value(user) == 21
       print "#{user.name}: Do you want to (h)it or (s)tand?\n"
       answer = gets.chomp.strip.downcase
       if answer == "h"
@@ -131,7 +131,7 @@ class Game
     puts "You have $#{player.money - 10} and you bet $10."
   end
 
-  def bust?(player)
+  def player_busts(player)
     if hand_value(player) > 21 && player.name == "Dealer"
       print "The #{player.name} busted! "
       @user.money_talks
@@ -142,7 +142,7 @@ class Game
     end
   end
 
-  def tie?(user, dealer)
+  def check_if_tie(user, dealer)
     hand_value(user) == hand_value(dealer)
     puts "You tied!"
     replay()
@@ -152,7 +152,7 @@ class Game
     if hand_value(user) > hand_value(dealer) && hand_value(user) < 21
       you_win(user)
     elsif hand_value(user) == hand_value(dealer)
-      tie?(user, dealer)
+      check_if_tie(user, dealer)
     else
       you_lose(user)
     end
