@@ -143,8 +143,9 @@ class Game
   end
 
   def check_if_tie(user, dealer)
-    hand_value(user) == hand_value(dealer)
-    puts "You tied!"
+    if hand_value(user) == hand_value(dealer)
+      puts "You tied!"
+    end
     replay()
   end
 
